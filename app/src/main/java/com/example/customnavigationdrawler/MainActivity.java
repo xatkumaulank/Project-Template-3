@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
 
         viewPagerAdapter = new ViewPagerAdapter(this);
-        //binding.viewPager2.setAdapter(viewPagerAdapter);
+        binding.viewPager2.setAdapter(viewPagerAdapter);
 
 
 //        new TabLayoutMediator(binding.tabLayout, binding.viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         binding.navigationView.setNavigationItemSelectedListener(this);
 
-        replaceFragment(new HomeFragment());
+        //replaceFragment(new HomeFragment());
         binding.navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
         binding.bottomNavigation.getMenu().findItem(R.id.bottom_home).setChecked(true);
 
@@ -77,39 +77,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 int id = item.getItemId();
                 if (id == R.id.bottom_home){
                     replaceHomeFragment();
-                    binding.navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
+                    //binding.navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
                 }else  if (id == R.id.bottom_favorite){
                     replaceFavoriteFragment();
-                    binding.navigationView.getMenu().findItem(R.id.nav_favorite).setChecked(true);
+                   // binding.navigationView.getMenu().findItem(R.id.nav_favorite).setChecked(true);
                 }else  if (id == R.id.bottom_history){
                     replaceHistoryFragment();
-                    binding.navigationView.getMenu().findItem(R.id.nav_history).setChecked(true);
+                    //binding.navigationView.getMenu().findItem(R.id.nav_history).setChecked(true);
                 }
                 return true;
             }
         });
-//        binding.viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-//            @Override
-//            public void onPageSelected(int position) {
-//                super.onPageSelected(position);
-//                switch (position){
-//                    case 0:
-//                        currentFragment = FRAGMENT_HOME;
-//                        binding.navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
-//                        break;
-//
-//                    case 1:
-//                        currentFragment = FRAGMENT_FAVORITE;
-//                        binding.navigationView.getMenu().findItem(R.id.nav_favorite).setChecked(true);
-//                        break;
-//
-//                    case 2:
-//                        currentFragment = FRAGMENT_HISTORY;
-//                        binding.navigationView.getMenu().findItem(R.id.nav_history).setChecked(true);
-//                        break;
-//                }
-//            }
-//        });
+        binding.viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                switch (position){
+                    case 0:
+                        currentFragment = FRAGMENT_HOME;
+                        binding.navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
+                        binding.bottomNavigation.getMenu().findItem(R.id.bottom_home).setChecked(true);
+                        break;
+
+                    case 1:
+                        currentFragment = FRAGMENT_FAVORITE;
+                        binding.navigationView.getMenu().findItem(R.id.nav_favorite).setChecked(true);
+                        binding.bottomNavigation.getMenu().findItem(R.id.bottom_favorite).setChecked(true);
+                        break;
+
+                    case 2:
+                        currentFragment = FRAGMENT_HISTORY;
+                        binding.navigationView.getMenu().findItem(R.id.nav_history).setChecked(true);
+                        binding.bottomNavigation.getMenu().findItem(R.id.bottom_history).setChecked(true);
+                        break;
+                }
+            }
+        });
 
     }
 
@@ -118,35 +121,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         if (id == R.id.nav_home){
             replaceHomeFragment();
-            binding.bottomNavigation.getMenu().findItem(R.id.bottom_home).setChecked(true);
+            //binding.bottomNavigation.getMenu().findItem(R.id.bottom_home).setChecked(true);
         }else if (id == R.id.nav_favorite){
             replaceFavoriteFragment();
-            binding.bottomNavigation.getMenu().findItem(R.id.bottom_favorite).setChecked(true);
+            //binding.bottomNavigation.getMenu().findItem(R.id.bottom_favorite).setChecked(true);
         }else if (id == R.id.nav_history){
-           replaceHistoryFragment();
-            binding.bottomNavigation.getMenu().findItem(R.id.bottom_history).setChecked(true);
+            replaceHistoryFragment();
+            //binding.bottomNavigation.getMenu().findItem(R.id.bottom_history).setChecked(true);
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
     private void replaceHomeFragment(){
         if (currentFragment != FRAGMENT_HOME){
-            replaceFragment(new HomeFragment());
-            //binding.viewPager2.setCurrentItem(0);
+            //replaceFragment(new HomeFragment());
+            binding.viewPager2.setCurrentItem(0);
             currentFragment = FRAGMENT_HOME;
         }
     }
     private void replaceFavoriteFragment(){
         if (currentFragment != FRAGMENT_FAVORITE){
-            replaceFragment(new FavoriteFragment());
-            //binding.viewPager2.setCurrentItem(1);
+            //replaceFragment(new FavoriteFragment());
+            binding.viewPager2.setCurrentItem(1);
             currentFragment = FRAGMENT_FAVORITE;
         }
     }
     private void replaceHistoryFragment(){
         if (currentFragment != FRAGMENT_HISTORY){
-            replaceFragment(new HistoryFragment());
-            //binding.viewPager2.setCurrentItem(2);
+            //replaceFragment(new HistoryFragment());
+            binding.viewPager2.setCurrentItem(2);
             currentFragment = FRAGMENT_HISTORY;
         }
     }
@@ -158,9 +161,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
-    private void replaceFragment(Fragment fragment){
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.content_frame,fragment);
-        fragmentTransaction.commit();
-    }
+//    private void replaceFragment(Fragment fragment){
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//        fragmentTransaction.replace(R.id.content_frame,fragment);
+//        fragmentTransaction.commit();
+//    }
 }
