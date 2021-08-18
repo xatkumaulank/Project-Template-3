@@ -26,12 +26,14 @@
                     android:background="@color/teal_700"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
             </com.google.android.material.appbar.AppBarLayout>
-            <FrameLayout
-                android:id="@+id/content_frame"
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </FrameLayout>
+                android:layout_height="wrap_content"/>
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/view_pager_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
         </LinearLayout>
 
 
